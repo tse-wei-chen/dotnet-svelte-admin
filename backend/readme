@@ -1,0 +1,1 @@
+dotnet ef migrations add InitUser -c UserDbContext -o Services/UserServices/Migrate
