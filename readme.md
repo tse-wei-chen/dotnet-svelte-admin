@@ -1,8 +1,8 @@
 # dotnet-svelte-admin
 
-![dotnet-svelte-admin](readme\black.png "dotnet-svelte-admin")
-![dotnet-svelte-admin](readme\white.png "dotnet-svelte-admin")
-![dotnet-svelte-admin](readme\login.png "dotnet-svelte-admin")
+![dotnet-svelte-admin](readme/black.png "dotnet-svelte-admin")
+![dotnet-svelte-admin](readme/white.png "dotnet-svelte-admin")
+![dotnet-svelte-admin](readme/login.png "dotnet-svelte-admin")
 
 A starter admin panel project combining a .NET backend and a Svelte frontend.
 
