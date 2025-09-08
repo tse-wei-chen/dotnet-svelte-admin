@@ -14,8 +14,9 @@ This repository contains two main folders:
 ## Features
 
 - JWT authentication (Bearer tokens) — backend issues JWTs for authenticating API requests. Configure the secret via environment variables or `backend/appsettings.Development.json` and keep it out of source control.
-- Svelte + Vite frontend with Tailwind CSS and shadcn-style UI components (in-repo UI primitives). can switch black white theme
- - Svelte + Vite frontend with Tailwind CSS and shadcn-style UI components (in-repo UI primitives). Supports light and dark themes (black/white) with a UI toggle.
+
+- Svelte + Vite frontend with Tailwind CSS and shadcn-style UI components (in-repo UI primitives). Supports light and dark themes (black/white) with a UI toggle.
+
 - PostgreSQL persistence with EF Core on the backend.
 
 ## Quick overview
