@@ -28,7 +28,7 @@ Both frameworks are designed for high performance: .NET delivers a fast, scalabl
 
 ## Prerequisites
 
-- .NET SDK (recommended: .NET 7/8/9 matching the project files)
+- .NET SDK (recommended: .NET 9 matching the project files)
 - Node.js (LTS)
 - pnpm (you can install it globally via npm)
 - PostgreSQL (local install or Docker)
