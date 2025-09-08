@@ -17,6 +17,7 @@
   import HomeIcon from "@tabler/icons-svelte/icons/home";
   import CpuIcon from "@tabler/icons-svelte/icons/cpu";
   import UserIcon from "@tabler/icons-svelte/icons/user";
+  import { goto } from "$app/navigation";
   let data = $state({
     user: {
       name: "shadcn",
@@ -49,11 +50,11 @@
         url: "/activity",
         icon: UsersIcon
       },
-	  {
-		title: "Reports",
-		url: "/reports",
-		icon: FileDescriptionIcon
-	  }
+      {
+        title: "Reports",
+        url: "/reports",
+        icon: FileDescriptionIcon
+      }
     ],
     navSecondary: [
       {
@@ -76,8 +77,12 @@
 
   onMount(() => {
     let userinfo = localStorage.getItem("userinfo");
-    if (userinfo) {
+    let accessToken = localStorage.getItem("accessToken");
+
+    if (userinfo && accessToken) {
       data.user = JSON.parse(userinfo);
+    } else {
+      goto("/login");
     }
   });
 
