@@ -39,6 +39,46 @@ Install pnpm globally (if you don't have it):
 npm i -g pnpm
 ```
 
+Create a `.env` file in the `frontend/` folder so the client can read the API base URL. Vite/Svelte exposes variables prefixed with `PUBLIC_` to the browser.
+
+PowerShell example (from repository root):
+
+```powershell
+# create the file and write the variable
+cd frontend
+'PUBLIC_apiUrl=http://localhost:5000' | Out-File -Encoding utf8 .env
+
+# verify the file
+Get-Content .\frontend\.env
+```
+
+In the frontend code use the exposed variable via `import.meta.env.PUBLIC_apiUrl` (or the framework's env helper) to build API requests.
+
+
+## Quick start (Docker)
+
+If you want a fast way to run the full stack (backend, frontend and database) locally, use Docker Compose. From the repository root run the following in PowerShell to build and start the services:
+
+```powershell
+# build and start in detached mode
+docker compose up --build -d
+
+# follow logs (optional)
+docker compose logs -f
+
+# stop and remove containers, networks and volumes created by compose
+docker compose down -v
+```
+
+After the services start you can usually access:
+
+- Frontend: http://localhost:5173
+- Backend API: http://localhost:5000
+- Backend API Swagger: http://localhost:5000/swagger/index.html
+
+Notes:
+- Docker Desktop is recommended on Windows. If you don't use Docker, run backend and frontend locally as described below.
+
 ## Docker on Windows (Docker Desktop recommended)
 
 If you plan to run PostgreSQL with Docker on Windows, installing Docker Desktop is the recommended and simplest option. Docker Desktop provides the Docker Engine, CLI, and a GUI, and integrates with WSL2 for best performance.
@@ -147,23 +187,6 @@ pnpm run dev
 Open the dev server URL printed by Vite (usually `http://localhost:5173`) in your browser.
 
 Note: older notes in this repo refer to `fronted` — the correct folder name is `frontend`.
-
-#### Environment file (.env)
-
-Create a `.env` file in the `frontend/` folder so the client can read the API base URL. Vite/Svelte exposes variables prefixed with `PUBLIC_` to the browser.
-
-PowerShell example (from repository root):
-
-```powershell
-# create the file and write the variable
-cd frontend
-'PUBLIC_apiUrl=http://localhost:5000' | Out-File -Encoding utf8 .env
-
-# verify the file
-Get-Content .\frontend\.env
-```
-
-In the frontend code use the exposed variable via `import.meta.env.PUBLIC_apiUrl` (or the framework's env helper) to build API requests.
 
 ## Build for production
 
