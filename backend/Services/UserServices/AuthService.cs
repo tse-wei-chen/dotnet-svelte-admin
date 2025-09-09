@@ -6,6 +6,7 @@ using backend.Services.UserServices.Interface;
 using backend.Services.UserServices.Model;
 using backend.Services.UserServices.Request;
 using backend.Services.UserServices.View;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services.UserServices
 {
@@ -14,27 +15,27 @@ namespace backend.Services.UserServices
         private readonly UserDbContext _dbContext = dbContext;
         private readonly IConfiguration _configuration = configuration;
 
-        public ResponseBase Register(RegisterInfo request)
+        public async Task<ResponseBase> Register(RegisterInfo request)
         {
-            _dbContext.Users.Add(new User
+            await _dbContext.Users.AddAsync(new User
             {
                 UserName = request.Name,
                 Email = request.Email,
                 PasswordHash = request.Password
             });
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
             return ResponseBase.Ok("Registration successful.");
         }
 
-        public ResponseBase<LoginVM> Login(LoginInfo loginInfo)
+        public async Task<ResponseBase<LoginVM>> Login(LoginInfo loginInfo)
         {
-            var user = _dbContext.Users.SingleOrDefault(u => u.Email == loginInfo.Email);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Email == loginInfo.Email);
             if (user == null || !Encrypt.Verify(loginInfo.Password, user.PasswordHash))
             {
                 return ResponseBase<LoginVM>.Fail(ResponseStatusCode.Forbidden, "Invalid email or password.");
             }
             user.RefreshToken = JwtTokenHelper.GenerateRefreshToken();
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return ResponseBase<LoginVM>.Ok(new LoginVM
             {
@@ -46,15 +47,15 @@ namespace backend.Services.UserServices
             }, "Login successful.");
         }
 
-        public ResponseBase<RefreshTokenVM> RefreshToken(RefreshTokenRequest request)
+        public async Task<ResponseBase<RefreshTokenVM>> RefreshToken(RefreshTokenRequest request)
         {
-            var user = _dbContext.Users.SingleOrDefault(u => u.RefreshToken == request.RefreshToken);
+            var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.RefreshToken == request.RefreshToken);
             if (user == null)
             {
                 return ResponseBase<RefreshTokenVM>.Fail(ResponseStatusCode.Forbidden, "Invalid refresh token.");
             }
             user.RefreshToken = JwtTokenHelper.GenerateRefreshToken();
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return ResponseBase<RefreshTokenVM>.Ok(new RefreshTokenVM
             {

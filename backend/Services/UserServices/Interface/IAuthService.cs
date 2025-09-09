@@ -6,10 +6,10 @@ namespace backend.Services.UserServices.Interface
 {
     public interface IAuthService
     {
-        ResponseBase Register(RegisterInfo request);
+        Task<ResponseBase> Register(RegisterInfo request);
 
-        ResponseBase<LoginVM> Login(LoginInfo request);
+        Task<ResponseBase<LoginVM>> Login(LoginInfo request);
 
-        ResponseBase<RefreshTokenVM> RefreshToken(RefreshTokenRequest request);
+        Task<ResponseBase<RefreshTokenVM>> RefreshToken(RefreshTokenRequest request);
     }
 }

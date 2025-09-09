@@ -13,15 +13,15 @@ namespace backend.Controllers
         private readonly IAuthService _authService = authService;
 
         [HttpPost("login")]
-        public ActionResult<ResponseBase<LoginVM>> Login([FromBody] LoginRequest request)
-            => _authService.Login(request);
+        public async Task<ActionResult<ResponseBase<LoginVM>>> Login([FromBody] LoginRequest request)
+            => await _authService.Login(request);
 
         [HttpPost("register")]
-        public ActionResult<ResponseBase> Register([FromBody] RegisterRequest request)
-            => _authService.Register(request);
+        public async Task<ActionResult<ResponseBase>> Register([FromBody] RegisterRequest request)
+            => await _authService.Register(request);
 
         [HttpPost("refresh-token")]
-        public ActionResult<ResponseBase<RefreshTokenVM>> RefreshToken([FromBody] RefreshTokenRequest request)
-            => _authService.RefreshToken(request);
+        public async Task<ActionResult<ResponseBase<RefreshTokenVM>>> RefreshToken([FromBody] RefreshTokenRequest request)
+            => await _authService.RefreshToken(request);
     }
 }

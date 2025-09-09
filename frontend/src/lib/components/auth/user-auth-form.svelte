@@ -1,8 +1,8 @@
 <script lang="ts" module>
 	import { z } from "zod";
 	export const formSchema = z.object({
-		email: z.string().email({ message: "請輸入有效的 Email" }),
-		password: z.string().min(8, { message: "密碼長度必須至少 8 個字符" }).max(100, { message: "密碼長度不能超過 100 個字符" }),
+		email: z.string().nonempty({ message: "please enter Email" }),
+		password: z.string().nonempty({ message: "please enter Password" })
 	});
 </script>
 
@@ -72,7 +72,7 @@
 							<Input
 								id="email"
 								placeholder="name@example.com"
-								type="email"
+								type="text"
 								autocapitalize="none"
 								autocomplete="email"
 								autocorrect="off"

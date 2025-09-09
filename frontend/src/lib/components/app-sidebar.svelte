@@ -13,7 +13,7 @@
   import NavSecondary from "./nav-secondary.svelte";
   import NavUser from "./nav-user.svelte";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
-  import { onMount, type ComponentProps } from "svelte";
+  import { type ComponentProps } from "svelte";
   import HomeIcon from "@tabler/icons-svelte/icons/home";
   import CpuIcon from "@tabler/icons-svelte/icons/cpu";
   import UserIcon from "@tabler/icons-svelte/icons/user";
@@ -73,17 +73,6 @@
         icon: SearchIcon
       }
     ]
-  });
-
-  onMount(() => {
-    let userinfo = localStorage.getItem("userinfo");
-    let accessToken = localStorage.getItem("accessToken");
-
-    if (userinfo && accessToken) {
-      data.user = JSON.parse(userinfo);
-    } else {
-      goto("/login");
-    }
   });
 
   let { ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
