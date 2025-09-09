@@ -148,6 +148,23 @@ Open the dev server URL printed by Vite (usually `http://localhost:5173`) in you
 
 Note: older notes in this repo refer to `fronted` — the correct folder name is `frontend`.
 
+#### Environment file (.env)
+
+Create a `.env` file in the `frontend/` folder so the client can read the API base URL. Vite/Svelte exposes variables prefixed with `PUBLIC_` to the browser.
+
+PowerShell example (from repository root):
+
+```powershell
+# create the file and write the variable
+cd frontend
+'PUBLIC_apiUrl=http://localhost:5000' | Out-File -Encoding utf8 .env
+
+# verify the file
+Get-Content .\frontend\.env
+```
+
+In the frontend code use the exposed variable via `import.meta.env.PUBLIC_apiUrl` (or the framework's env helper) to build API requests.
+
 ## Build for production
 
 Backend:

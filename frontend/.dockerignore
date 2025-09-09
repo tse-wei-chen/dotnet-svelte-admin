@@ -1,0 +1,11 @@
+node_modules
+.vscode
+.git
+.DS_Store
+dist
+build
+npm-debug.log
+pnpm-debug.log
+coverage
+backend/bin
+backend/obj
